@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+import med.voll.api.dto.medico.AtualizarDadosMedico;
 import med.voll.api.dto.medico.DadosCadastroMedico;
 import med.voll.api.dto.medico.DadosListagemMedico;
 import med.voll.api.entity.Medico;
@@ -29,6 +31,19 @@ public class MedicoService {
     }
 
     public Page<DadosListagemMedico> buscarDadosListagemMedicos(Pageable paginacao) {
-        return medicoRepository.findAll(paginacao).map(DadosListagemMedico::new);
+        return medicoRepository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
+    }
+
+    @Transactional
+    public DadosListagemMedico atualizarMedico(Long id, AtualizarDadosMedico dados) {
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.atualizarInformacoes(dados);
+        return new DadosListagemMedico(medico);
+    }
+
+    @Transactional
+    public void deletarMedico(Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+        medico.inativar();
     }
 }
