@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
@@ -13,12 +12,10 @@ import med.voll.api.dto.paciente.AtualizarDadosPaciente;
 import med.voll.api.dto.paciente.DadosCadastroPaciente;
 import med.voll.api.dto.paciente.DadosDetalhamentoPaciente;
 import med.voll.api.dto.paciente.DadosListagemPaciente;
-import med.voll.api.entity.Paciente;
 import med.voll.api.service.PacienteService;
 
 import java.net.URI;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
