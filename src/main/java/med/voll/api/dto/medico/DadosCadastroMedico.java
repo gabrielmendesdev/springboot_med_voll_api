@@ -9,20 +9,22 @@ import med.voll.api.entity.Endereco;
 import med.voll.api.enums.medico.Especialidade;
 
 public record DadosCadastroMedico(
-        @NotBlank
-        String nome,
-        @NotBlank
-        @Email
-        String email,
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
-        String crm,
-        @NotNull
-        Especialidade especialidade,
-        @NotNull
-        @Valid
-        Endereco endereco,
-        @NotBlank
-        String telefone
-) {
-}
+    @NotBlank(message = "Nome é obrigatório")
+    String nome,
+
+    @NotBlank(message = "Email é obrigatório")
+    @Email(message = "Formato do email é inválido")
+    String email,
+
+    @NotBlank(message = "Telefone é obrigatório")
+    String telefone,
+
+    @NotBlank(message = "CRM é obrigatório")
+    @Pattern(regexp = "\\d{4,6}", message = "Formato do CRM é inválido")
+    String crm,
+
+    @NotNull(message = "Especialidade é obrigatória")
+    Especialidade especialidade,
+
+    @NotNull(message = "Dados do endereço são obrigatórios")
+    @Valid Endereco endereco) {}

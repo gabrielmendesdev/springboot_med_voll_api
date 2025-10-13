@@ -14,16 +14,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Endereco {
-    @NotBlank
+    @NotBlank(message = "Logradouro é obrigatório")
     private String logradouro;
-    @NotBlank
-    @Pattern(regexp = "\\d{8}")
+    @NotBlank(message = "CEP é obrigatório")
+    @Pattern(regexp = "\\d{8}", message = "Formato do CEP é inválido")
     private String cep;
-    @NotBlank
+    @NotBlank(message = "Bairro é obrigatório")
     private String bairro;
-    @NotBlank
+    @NotBlank(message = "Cidade é obrigatória")
     private String cidade;
-    @NotBlank
+    @NotBlank(message = "UF é obrigatória")
     private String uf;
     private String numero;
     private String complemento;

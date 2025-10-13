@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import med.voll.api.entity.Endereco;
 
 public record AtualizarDadosMedico(
-    @NotBlank
+    @NotBlank(message = "Nome é obrigatório")
     String nome,
-    @NotBlank
+    @NotBlank(message = "Telefone é obrigatório")
     String telefone,
     @Valid
     Endereco endereco) {

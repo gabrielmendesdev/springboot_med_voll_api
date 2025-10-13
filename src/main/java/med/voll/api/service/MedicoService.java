@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import med.voll.api.dto.medico.AtualizarDadosMedico;
 import med.voll.api.dto.medico.DadosCadastroMedico;
+import med.voll.api.dto.medico.DadosDetalhamentoMedico;
 import med.voll.api.dto.medico.DadosListagemMedico;
 import med.voll.api.entity.Medico;
 import med.voll.api.repository.MedicoRepository;
@@ -20,14 +21,14 @@ public class MedicoService {
     @Autowired
     private MedicoRepository medicoRepository;
 
-    public Medico salvarMedico(DadosCadastroMedico medicoDTO) {
-        Medico entity = new Medico(medicoDTO);
-        Medico medico = medicoRepository.save(entity);
-        return medico;
+    public DadosDetalhamentoMedico salvarMedico(DadosCadastroMedico medicoDTO) {
+        return new DadosDetalhamentoMedico(medicoRepository.save(new Medico(medicoDTO)));
     }
 
-    public List<Medico> buscarMedicos() {
-        return medicoRepository.findAll();
+    public List<DadosDetalhamentoMedico> buscarMedicos() {
+        return medicoRepository.findAll().stream()
+                .map(DadosDetalhamentoMedico::new)
+                .toList();
     }
 
     public Page<DadosListagemMedico> buscarDadosListagemMedicos(Pageable paginacao) {
@@ -45,5 +46,10 @@ public class MedicoService {
     public void deletarMedico(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
         medico.inativar();
+    }
+
+    public DadosDetalhamentoMedico buscarDetalhesById(Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+        return new DadosDetalhamentoMedico(medico);
     }
 }

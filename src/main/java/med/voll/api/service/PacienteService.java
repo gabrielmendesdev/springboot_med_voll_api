@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import med.voll.api.dto.paciente.AtualizarDadosPaciente;
 import med.voll.api.dto.paciente.DadosCadastroPaciente;
+import med.voll.api.dto.paciente.DadosDetalhamentoPaciente;
 import med.voll.api.dto.paciente.DadosListagemPaciente;
 import med.voll.api.entity.Paciente;
 import med.voll.api.repository.PacienteRepository;
@@ -21,10 +22,8 @@ public class PacienteService {
     private PacienteRepository pacienteRepository;
 
     @Transactional
-    public Paciente salvarPaciente(DadosCadastroPaciente pacienteDTO) {
-        Paciente entity = new Paciente(pacienteDTO);
-        Paciente paciente = pacienteRepository.save(entity);
-        return paciente;
+    public DadosDetalhamentoPaciente salvarPaciente(DadosCadastroPaciente pacienteDTO) {
+        return new DadosDetalhamentoPaciente(pacienteRepository.save(new Paciente(pacienteDTO)));
     }
 
     public List<Paciente> buscarPacientes() {
@@ -46,5 +45,10 @@ public class PacienteService {
     public void deletarPaciente(Long id) {
         Paciente paciente = pacienteRepository.getReferenceById(id);
         paciente.inativar();
+    }
+
+    public DadosDetalhamentoPaciente buscarDetalhesById(Long id) {
+        Paciente paciente = pacienteRepository.getReferenceById(id);
+        return new DadosDetalhamentoPaciente(paciente);
     }
 }
