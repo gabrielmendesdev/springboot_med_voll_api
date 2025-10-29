@@ -24,18 +24,18 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API Voll.med")
                     .withSubject(usuario.getLogin())
-                    .withExpiresAt(dataExpiracao())
+                    //.withExpiresAt(dataExpiracao()) Comentado para facilitar os testes (É mais seguro habilitado)
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Erro ao gerar token JWT", e);
         }
     }
 
-    private Date dataExpiracao() {
-        return Date.from(LocalDateTime.now()
-                .plusHours(2)
-                .toInstant(ZoneOffset.of("-03:00")));
-    }
+    // private Date dataExpiracao() {
+    //     return Date.from(LocalDateTime.now()
+    //             .plusHours(2)
+    //             .toInstant(ZoneOffset.of("-03:00")));
+    // }
 
     public String getSubject(String tokenJWT) {
         try {
