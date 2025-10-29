@@ -12,11 +12,9 @@ import med.voll.api.dto.medico.AtualizarDadosMedico;
 import med.voll.api.dto.medico.DadosCadastroMedico;
 import med.voll.api.dto.medico.DadosDetalhamentoMedico;
 import med.voll.api.dto.medico.DadosListagemMedico;
-import med.voll.api.entity.Medico;
 import med.voll.api.service.MedicoService;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
