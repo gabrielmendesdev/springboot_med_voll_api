@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,8 @@ import med.voll.api.dto.medico.AtualizarDadosMedico;
 import med.voll.api.dto.medico.DadosCadastroMedico;
 import med.voll.api.enums.medico.Especialidade;
 
-@Entity(name = "medicos")
+@Entity
+@Table(name = "medicos")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
